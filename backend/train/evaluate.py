@@ -145,13 +145,13 @@ def main():
     model_size_mb = model_size_bytes / (1024 * 1024)
 
     # ─── Print Results ───────────────────────────────────
-    print(f"\n{'─' * 40}")
+    print(f"\n{'-' * 40}")
     print(f"  Accuracy:         {accuracy:.4f}")
     print(f"  Precision (macro): {precision_macro:.4f}")
     print(f"  Recall (macro):    {recall_macro:.4f}")
     print(f"  F1 Score (macro):  {f1_macro:.4f}")
     print(f"  F1 Score (weighted): {f1_weighted:.4f}")
-    print(f"{'─' * 40}")
+    print(f"{'-' * 40}")
 
     print(f"\n  Per-Class Performance:")
     for i, name in enumerate(label_names):
@@ -202,7 +202,7 @@ def main():
         json.dump(evaluation, f, indent=2)
 
     print(f"\n[+] Evaluation saved to {EVALUATION_METRICS_PATH}")
-    print("[✓] Evaluation complete!")
+    print("[OK] Evaluation complete!")
 
 
 if __name__ == "__main__":

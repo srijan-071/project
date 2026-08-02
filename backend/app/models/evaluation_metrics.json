@@ -1,0 +1,134 @@
+{
+  "overall": {
+    "accuracy": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0,
+    "f1_macro": 1.0,
+    "f1_weighted": 1.0
+  },
+  "per_class": {
+    "negative": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 108
+    },
+    "neutral": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 14
+    },
+    "positive": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 108
+    }
+  },
+  "confusion_matrix": [
+    [
+      108,
+      0,
+      0
+    ],
+    [
+      0,
+      14,
+      0
+    ],
+    [
+      0,
+      0,
+      108
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "inference": {
+    "avg_ms_per_sample": 4.71,
+    "total_time_seconds": 1.08,
+    "test_samples": 230
+  },
+  "model": {
+    "parameters": 417411,
+    "size_mb": 1.74,
+    "architecture": {
+      "model_name": "FinSight Transformer v1",
+      "architecture": "Custom Transformer Encoder",
+      "vocab_size": 90,
+      "embed_dim": 128,
+      "num_heads": 4,
+      "num_layers": 3,
+      "ff_dim": 256,
+      "max_seq_len": 256,
+      "num_classes": 3,
+      "total_parameters": 417411,
+      "components": [
+        {
+          "name": "Token Embedding",
+          "type": "nn.Embedding",
+          "input_shape": "(batch, 256)",
+          "output_shape": "(batch, 256, 128)",
+          "parameters": 11520,
+          "description": "Maps each token ID to a dense vector representation of financial language."
+        },
+        {
+          "name": "Positional Encoding",
+          "type": "Sinusoidal",
+          "input_shape": "(batch, 256, 128)",
+          "output_shape": "(batch, 256, 128)",
+          "parameters": 0,
+          "description": "Injects word position information using sine and cosine functions so the model knows word order."
+        },
+        {
+          "name": "Transformer Encoder \u00d7 3",
+          "type": "TransformerEncoderBlock",
+          "input_shape": "(batch, 256, 128)",
+          "output_shape": "(batch, 256, 128)",
+          "parameters": 397440,
+          "description": "Each block applies multi-head self-attention followed by a feed-forward network with residual connections and layer normalization.",
+          "sub_components": [
+            {
+              "name": "Multi-Head Self-Attention",
+              "type": "Scaled Dot-Product",
+              "heads": 4,
+              "head_dim": 32,
+              "description": "Allows the model to identify relationships between different words regardless of their position within the sentence."
+            },
+            {
+              "name": "Add & Layer Normalization",
+              "type": "LayerNorm",
+              "description": "Residual connection preserves original information while normalization stabilizes training."
+            },
+            {
+              "name": "Feed-Forward Network",
+              "type": "2-layer MLP + GELU",
+              "hidden_dim": 256,
+              "description": "Applies non-linear transformations to each token representation independently."
+            }
+          ]
+        },
+        {
+          "name": "CLS Pooling",
+          "type": "Token Selection",
+          "input_shape": "(batch, 256, 128)",
+          "output_shape": "(batch, 128)",
+          "parameters": 0,
+          "description": "Extracts the [CLS] token representation which captures the global context of the entire input."
+        },
+        {
+          "name": "Classification Head",
+          "type": "MLP",
+          "input_shape": "(batch, 128)",
+          "output_shape": "(batch, 3)",
+          "parameters": 8451,
+          "description": "Maps the contextual representation to sentiment class probabilities through dense layers with dropout."
+        }
+      ]
+    }
+  }
+}

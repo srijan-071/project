@@ -1,0 +1,39 @@
+{
+  "lstm": {
+    "model_name": "LSTM Baseline",
+    "architecture": "2-Layer Bidirectional LSTM",
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "parameters": 172035,
+    "model_size_mb": 0.66,
+    "avg_inference_ms": 1.43,
+    "training_time_seconds": 318.12
+  },
+  "tfidf_lr": {
+    "model_name": "TF-IDF + Logistic Regression",
+    "architecture": "TF-IDF (10K features, bigrams) + Logistic Regression",
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "parameters": 819,
+    "model_size_mb": 0.01,
+    "avg_inference_ms": 0.0,
+    "training_time_seconds": 0.06
+  },
+  "finbert_reference": {
+    "model_name": "FinBERT (Reference)",
+    "architecture": "Pre-trained BERT fine-tuned on financial text",
+    "accuracy": 0.87,
+    "f1_score": 0.87,
+    "precision": 0.87,
+    "recall": 0.87,
+    "parameters": 110000000,
+    "model_size_mb": 418.0,
+    "avg_inference_ms": 45.0,
+    "training_time_seconds": null,
+    "note": "Published benchmark values. Not trained in this project."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "finsight-ai",
+  "version": "1.0.0",
+  "description": "FinSight AI - Custom Transformer Financial Sentiment Intelligence Platform",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": "cd backend && uvicorn app.main:app --port 8000 --reload"
+  }
+}

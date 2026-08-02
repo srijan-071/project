@@ -269,10 +269,10 @@ def main():
 
         # Print progress
         print(
-            f"  Epoch {epoch+1:02d}/{NUM_EPOCHS} │ "
-            f"Train Loss: {train_loss:.4f} Acc: {train_acc:.4f} │ "
-            f"Val Loss: {val_loss:.4f} Acc: {val_acc:.4f} F1: {val_f1:.4f} │ "
-            f"LR: {current_lr:.6f} │ {epoch_time:.1f}s"
+            f"  Epoch {epoch+1:02d}/{NUM_EPOCHS} | "
+            f"Train Loss: {train_loss:.4f} Acc: {train_acc:.4f} | "
+            f"Val Loss: {val_loss:.4f} Acc: {val_acc:.4f} F1: {val_f1:.4f} | "
+            f"LR: {current_lr:.6f} | {epoch_time:.1f}s"
         )
 
         # Save best model
@@ -296,7 +296,7 @@ def main():
                 },
                 MODEL_WEIGHTS_PATH,
             )
-            print(f"  → Best model saved (Val F1: {val_f1:.4f})")
+            print(f"  -> Best model saved (Val F1: {val_f1:.4f})")
         else:
             patience_counter += 1
             if patience_counter >= PATIENCE:

@@ -4,7 +4,6 @@ All model hyperparameters, paths, and settings.
 """
 
 import os
-import torch
 
 # ─── Paths ────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -44,7 +43,11 @@ VAL_RATIO = 0.10
 TEST_RATIO = 0.10
 
 # ─── Device ───────────────────────────────────────────────
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+try:
+    import torch
+    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+except Exception:
+    DEVICE = "cpu"
 
 # ─── File Paths ───────────────────────────────────────────
 MODEL_WEIGHTS_PATH = os.path.join(MODELS_DIR, "transformer_weights.pt")

@@ -254,7 +254,7 @@ def main():
         json.dump(results, f, indent=2)
 
     print(f"\n[+] Baseline metrics saved to {BASELINE_METRICS_PATH}")
-    print("[✓] Baseline training complete!")
+    print("[OK] Baseline training complete!")
 
 
 if __name__ == "__main__":
