@@ -6,6 +6,7 @@ Main entry point for the backend server.
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.ml.inference import engine
 from app.database import init_db
@@ -40,7 +41,7 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    # ─── Shutdown ─────────────────────────────────────────
+    # ─── Shutdown ──────────────────────────────────────────
     print("[*] Shutting down FinSight AI")
 
 
@@ -81,8 +82,21 @@ async def root():
 
 @app.get("/health")
 async def health():
+    """Return service health without treating a missing model as a crash."""
     return {
         "status": "healthy",
         "model_loaded": engine.is_loaded,
         "model_info": engine.get_model_info() if engine.is_loaded else None,
     }
+
+
+@app.get("/ready")
+async def readiness():
+    """Report whether the API is ready to serve model-backed requests."""
+    if not engine.is_loaded:
+        return JSONResponse(
+            status_code=503,
+            content={"status": "not_ready", "reason": "model_not_loaded"},
+        )
+
+    return {"status": "ready"}
