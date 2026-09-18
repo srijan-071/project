@@ -33,6 +33,12 @@ If the frontend and backend are started separately, confirm the backend is reach
 
 The backend exposes `GET /ready` as a lightweight readiness check. A healthy response indicates that the API can serve requests and that the required model state is available. Use this endpoint from local checks or deployment health probes instead of treating the process being reachable as proof that inference is ready.
 
+### Readiness behavior
+
+- `200 OK` means the API and required model state are ready.
+- `503 Service Unavailable` means the API process is running but the model is not ready to serve inference.
+- A deployment should use `/ready` for readiness decisions and keep ordinary liveness checks separate.
+
 ## Goal
 
 Turn financial text into useful sentiment signals while keeping the application architecture easy to experiment with and extend.
