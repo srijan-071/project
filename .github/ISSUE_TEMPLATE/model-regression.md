@@ -1,6 +1,6 @@
 ---
 name: Model regression
-a bout: Report a sentiment result that changed unexpectedly
+about: Report a sentiment result that changed unexpectedly
 ---
 
 ## Summary
