@@ -1,0 +1,26 @@
+name: Backend smoke check
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-smoke.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-smoke.yml'
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Compile backend modules
+        run: python -m compileall -q backend/app
