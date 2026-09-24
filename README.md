@@ -13,31 +13,33 @@ project/
 
 ## Local development
 
-Install the frontend dependencies first, then run the two development servers:
-
 ```bash
 npm install
 npm run dev
 ```
 
-The repository also exposes separate commands:
-
-```bash
-npm run frontend   # frontend dev server
-npm run backend    # backend API on port 8000
-```
-
-If the frontend and backend are started separately, confirm the backend is reachable on port 8000 before testing API-backed screens.
+The repository also exposes `npm run frontend` and `npm run backend` for separate development servers.
 
 ## API readiness check
 
-The backend exposes `GET /ready` as a lightweight readiness check. A healthy response indicates that the API can serve requests and that the required model state is available. Use this endpoint from local checks or deployment health probes instead of treating the process being reachable as proof that inference is ready.
-
-### Readiness behavior
+The backend exposes `GET /ready`.
 
 - `200 OK` means the API and required model state are ready.
-- `503 Service Unavailable` means the API process is running but the model is not ready to serve inference.
-- A deployment should use `/ready` for readiness decisions and keep ordinary liveness checks separate.
+- `503 Service Unavailable` means the process is running but the model is not ready.
+- Use `/ready` for readiness decisions and keep liveness checks separate.
+
+## Reporting model issues
+
+For reproducible model or API issues, include:
+
+1. Exact command or endpoint.
+2. Minimal shareable input.
+3. Expected output.
+4. Actual output.
+5. Model/version or configuration, when known.
+6. Whether the issue reproduces consistently.
+
+Never include API keys, credentials, private customer data, or other secrets.
 
 ## Goal
 
@@ -46,14 +48,3 @@ Turn financial text into useful sentiment signals while keeping the application 
 ## Status
 
 Active development. Model, API, and frontend work may evolve as experiments are evaluated.
-
-## Troubleshooting
-
-- If `npm run dev` fails, run `npm install` again and check the Node.js version expected by the project dependencies.
-- If API-backed pages cannot connect, start the backend separately and verify port 8000 is available.
-- If `/ready` reports an unavailable model, check the backend model-loading configuration before testing inference endpoints.
-- When model behavior changes, record the input and expected sentiment outcome so regressions are easier to reproduce.
-
-## Reproducibility note
-
-When reporting a model or API issue, include the relevant command, a minimal input example, the expected result, and the observed result. Avoid including API keys, account credentials, or other sensitive data.
