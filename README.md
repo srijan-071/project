@@ -41,6 +41,16 @@ For reproducible model or API issues, include:
 
 Never include API keys, credentials, private customer data, or other secrets.
 
+## Suggested verification flow
+
+Before opening a bug report, run the readiness check and record the response:
+
+```bash
+curl -i http://localhost:8000/ready
+```
+
+For model behavior changes, compare the same input against the known model/configuration and include the smallest reproducible example in the report.
+
 ## Goal
 
 Turn financial text into useful sentiment signals while keeping the application architecture easy to experiment with and extend.
